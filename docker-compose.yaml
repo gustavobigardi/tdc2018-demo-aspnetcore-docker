@@ -1,28 +1,31 @@
 version: '3'
 
+networks: 
+    demo-network:
+        driver: bridge
+
 services:
+  db:
+    image: mysql:5.7
+    command: --disable-partition-engine-check
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart: always
+    networks:
+      - demo-network
+    environment:
+       MYSQL_ROOT_PASSWORD: secret
+       MYSQL_DATABASE: contacts
+       MYSQL_USER: dbuser
+       MYSQL_PASSWORD: 123Aa321
+       MYSQL_TCP_PORT: 3306
   aspnet:
-    image: demoaspnetdocker
     build:
       context: .
+    depends_on:
+      - db
     ports:
       - "8080:80"
     networks:
       - demo-network
-    depends_on:
-      - "mysqldemo"
-
-  mysqldemo:
-    image: mysql:5.7
-    environment:
-       MYSQL_RANDOM_ROOT_PASSWORD: 1
-       MYSQL_DATABASE: contacts
-       MYSQL_USER: dbuser
-       MYSQL_PASSWORD: 123Aa321
     restart: always
-    networks:
-      - demo-network
-
-networks: 
-    demo-network:
-        driver: bridge

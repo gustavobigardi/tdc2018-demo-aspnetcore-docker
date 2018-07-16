@@ -34,7 +34,8 @@ namespace DemoAspNetCore.Web
             });
 
             services.AddDbContext<DemoContext>(opt => opt.UseInMemoryDatabase("demodb"));
-            //services.AddDbContext<DemoContext>(opt => opt.UseMySql(@"Server=localhost; Database=contacts; Uid=dbuser; Pwd=123Aa321"));
+            
+            //services.AddDbContext<DemoContext>(opt => opt.UseMySql(@"server=db;uid=dbuser;pwd=123Aa321;database=contacts"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -56,7 +57,7 @@ namespace DemoAspNetCore.Web
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-             using (var serviceScope = app.ApplicationServices
+            using (var serviceScope = app.ApplicationServices
                       .GetRequiredService<IServiceScopeFactory>()
                       .CreateScope())
             {

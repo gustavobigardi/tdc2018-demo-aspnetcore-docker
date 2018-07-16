@@ -487,5 +487,7 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder
 .mfractor/
 
+#Mysql, Docker files
+mysql/
 
 # End of https://www.gitignore.io/api/windows,aspnetcore,visualstudio,visualstudiocode
