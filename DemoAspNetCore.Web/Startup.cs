@@ -63,7 +63,7 @@ namespace DemoAspNetCore.Web
             {
                 using(var context = serviceScope.ServiceProvider.GetService<DemoContext>())
                 {
-                    context.Database.Migrate();
+                    //context.Database.Migrate();
                     context.InitializeContactData();
                 }                
             }

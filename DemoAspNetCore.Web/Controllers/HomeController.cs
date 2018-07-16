@@ -19,8 +19,8 @@ namespace DemoAspNetCore.Web.Controllers
 
         public IActionResult Index()
         {
-            ViewData["contacts"] = _context.Contacts.ToList();
-            return View();
+            var contacts = _context.Contacts.ToList();
+            return View(contacts);
         }
 
         public IActionResult About()

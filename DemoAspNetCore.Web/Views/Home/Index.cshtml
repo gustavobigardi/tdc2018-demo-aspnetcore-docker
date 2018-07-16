@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<DemoAspNetCore.Web.Models.Contact>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,7 +7,7 @@
     <div class="col-sm-12">
         <h2>Contacts</h2>
         <ul>
-            @foreach(var contact in (List<Contact>) ViewData["contacts"]) 
+            @foreach(var contact in @Model) 
             {
                 <li><b>Name:</b> @contact.Name, <b>Email</b>: @contact.Email, <b>Phone</b>: @contact.Phone</li>
             }
