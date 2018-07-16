@@ -10,8 +10,16 @@ namespace DemoAspNetCore.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly DemoContext _context;
+        
+        public HomeController(DemoContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
+            ViewData["contacts"] = _context.Contacts.ToList();
             return View();
         }
 
