@@ -20,6 +20,7 @@ services:
        MYSQL_PASSWORD: 123Aa321
        MYSQL_TCP_PORT: 3306
   aspnet:
+    image: demoaspnetdocker
     build:
       context: .
     depends_on:
