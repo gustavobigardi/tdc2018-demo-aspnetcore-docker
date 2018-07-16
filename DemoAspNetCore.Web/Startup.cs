@@ -34,6 +34,7 @@ namespace DemoAspNetCore.Web
             });
 
             services.AddDbContext<DemoContext>(opt => opt.UseInMemoryDatabase("demodb"));
+            ##services.AddDbContext<DemoContext>(opt => opt.UseMySql(@"Server=localhost; Database=contacts; Uid=dbuser; Pwd=123Aa321"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -59,8 +60,11 @@ namespace DemoAspNetCore.Web
                       .GetRequiredService<IServiceScopeFactory>()
                       .CreateScope())
             {
-                serviceScope.ServiceProvider
-                    .GetService<DemoContext>().InitializeContactData();
+                using(var context = serviceScope.ServiceProvider.GetService<DemoContext>())
+                {
+                    context.Database.Migrate();
+                    context.InitializeContactData();
+                }                
             }
 
             app.UseMvc(routes =>
